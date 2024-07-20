@@ -2,8 +2,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SortMethod {
+    static <T extends Comparable<? super T>> List<T> processExtremesSort(List<T> list) {
+        T[] array = list.toArray((T[]) new Comparable[0]);
+        T[] orderedArray = Arrays.copyOf(array, array.length);
 
-    public static Object sortByExtremes(List<?> list){
+        int start = 0;
+        int end = array.length - 1;
+        int position = 0;
+
+        while (start <= end) {
+            if (position < array.length) {
+                orderedArray[position++] = array[start++];
+            }
+            if (position < array.length) {
+                orderedArray[position++] = array[end--];
+            }
+        }
+        return Arrays.asList(orderedArray);
+    }
+    /*public static Object sortByExtremes(List<?> list){
         if (list.isEmpty()){
             return Arrays.asList("Empty Array");
         }
@@ -77,4 +94,5 @@ public class SortMethod {
         }
         return Arrays.asList(orderedArray);
     }
+    */
 }
